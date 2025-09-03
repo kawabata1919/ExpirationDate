@@ -1,14 +1,22 @@
 import React, { useEffect, useState } from 'react';
 
-const STORAGE_KEY = 'expiry-list-items';
+// API_URLを動的に決定
+let API_URL;
+if (window.location.hostname === 'localhost') {
+  API_URL = 'https://localhost:8000';
+} else if (window.location.hostname === '192.168.0.170') {
+  API_URL = 'https://192.168.0.170:8000';
+} else {
+  API_URL = 'https://192.168.1.100:8000'; // デフォルト値
+}
 
 function getExpiryWarnings(items) {
   const today = new Date();
   today.setHours(0,0,0,0);
   const warnings = [];
   for (const item of items) {
-    if (!item.name || !item.expiry) continue;
-    const expiryDate = new Date(item.expiry);
+    if (!item.name || !item.expiry_date) continue;
+    const expiryDate = new Date(item.expiry_date);
     expiryDate.setHours(0,0,0,0);
     const diffDays = Math.floor((expiryDate - today) / (1000 * 60 * 60 * 24));
     if (diffDays === 0) {
@@ -23,7 +31,7 @@ function getExpiryWarnings(items) {
         message: `期限切れ${-diffDays}日`,
         color: 'red',
       });
-    } else if (diffDays <= 2) {
+    } else if (diffDays <= 7) {
       warnings.push({
         name: item.name,
         message: `残り${diffDays}日`,
@@ -36,23 +44,46 @@ function getExpiryWarnings(items) {
 
 const MainScreen = ({ onCameraClick, onListClick }) => {
   const [warnings, setWarnings] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  // マウスイベントの管理
+  const [isHovered, setIsHovered] = useState(false);
+
+  // マウスが要素に入った時のハンドラ
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
+
+  // マウスが要素から離れた時のハンドラ
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
 
   useEffect(() => {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    if (saved) {
+    const fetchItems = async () => {
+      setLoading(true);
       try {
-        const items = JSON.parse(saved);
+        const res = await fetch(`${API_URL}/foods`);
+        if (!res.ok) throw new Error('API取得エラー');
+        const items = await res.json();
         setWarnings(getExpiryWarnings(items));
-      } catch (e) {}
-    }
+      } catch (e) {
+        setWarnings([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchItems();
   }, []);
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', height: '100vh', justifyContent: 'center', background: '#f8f9fa' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', height: '100vh', justifyContent: 'center', background: '#f8f9fa', fontSize: '24px' }}>
       <h1>消費期限管理アプリ</h1>
       <div style={{ width: '350px', marginBottom: '20px', background: '#fff3e0', borderRadius: '8px', padding: '16px', boxShadow: '0 2px 4px rgba(0,0,0,0.05)' }}>
         <h3 style={{ margin: '0 0 10px 0' }}>期限迫る</h3>
-        {warnings.length === 0 ? (
+        {loading ? (
+          <div>読み込み中...</div>
+        ) : warnings.length === 0 ? (
           <div style={{ color: '#888' }}>期限が迫っている品目はありません</div>
         ) : (
           <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
@@ -65,14 +96,18 @@ const MainScreen = ({ onCameraClick, onListClick }) => {
         )}
       </div>
       <button
-        style={{ margin: '20px', padding: '20px 40px', fontSize: '1.2rem', borderRadius: '8px', border: 'none', background: '#4caf50', color: '#fff', cursor: 'pointer' }}
+        style={{ margin: '20px', padding: '20px 40px', fontSize: '1.2rem', borderRadius: '8px', border: 'none', background: '#4caf50', color: '#fff', cursor: 'pointer', opacity: isHovered ? 0.7 : 1}} // ホバー時は0.7、通常時は1 (不透明) }}
         onClick={onCameraClick}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
       >
         カメラで登録
       </button>
       <button
-        style={{ margin: '20px', padding: '20px 40px', fontSize: '1.2rem', borderRadius: '8px', border: 'none', background: '#2196f3', color: '#fff', cursor: 'pointer' }}
+        style={{ margin: '20px', padding: '20px 40px', fontSize: '1.2rem', borderRadius: '8px', border: 'none', background: '#2196f3', color: '#fff', cursor: 'pointer', opacity: isHovered ? 0.7 : 1 }}
         onClick={onListClick}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
       >
         消費期限リストを見る
       </button>
