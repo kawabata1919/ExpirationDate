@@ -52,6 +52,10 @@ Windows環境での構築ステップは以下の通り(Mac, Linuxでは別の�
 
 以上の設定を行い、Webアプリ内でパスを通すことでhttps通信を行うことができる。
 
+**フォルダExpirationDate以下に以下に記載する2つのファイルがあるが、自身の環境に合わせてファイル名、そして中身は変更すること。**
+./localhost+1-key.pem
+./localhost+1-key.pem
+
 **参考URL**
 - https://qiita.com/dai-andy1976/items/b179ef6e56087ad1943d
 - https://qiita.com/dai-andy1976/items/6a47bb36932aa1d5af2d
