@@ -6,9 +6,9 @@
 2. 手入力で消費（賞味）期限を入力
 
 ## 今後の展望
-カメラでバーコードを読み取り、自動的に消費（賞味）期限を入力できるようにする。
-バーコード等の情報はDBに保存して、履歴から再登録できるように設定する。
-よりよいUIへの改善
+- カメラでバーコードを読み取り、自動的に消費（賞味）期限を入力できるようにする。
+- バーコード等の情報はDBに保存して、履歴から再登録できるように設定する。
+- よりよいUIへの改善
 
 このアプリはまだ開発段階であり、このソースをもとに開発をしていくにあたり以下の設定が必要である。
 
@@ -53,8 +53,8 @@ Windows環境での構築ステップは以下の通り(Mac, Linuxでは別の�
 以上の設定を行い、Webアプリ内でパスを通すことでhttps通信を行うことができる。
 
 参考URL
-https://qiita.com/dai-andy1976/items/b179ef6e56087ad1943d
-https://qiita.com/dai-andy1976/items/6a47bb36932aa1d5af2d
-https://chocolatey.org/install#individual
-https://learn.microsoft.com/ja-jp/powershell/module/microsoft.powershell.core/about/about_execution_policies?view=powershell-7.5
-https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q10262656235
+- https://qiita.com/dai-andy1976/items/b179ef6e56087ad1943d
+- https://qiita.com/dai-andy1976/items/6a47bb36932aa1d5af2d
+- https://chocolatey.org/install#individual
+- https://learn.microsoft.com/ja-jp/powershell/module/microsoft.powershell.core/about/about_execution_policies?view=powershell-7.5
+- https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q10262656235
