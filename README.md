@@ -33,20 +33,24 @@ https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q10262656235
    ```
 
 4. chocoコマンドが実行できることを確認
-   > choco list -l
-   Chocolatey v2.5.0
+   ```choco list -l```
+   > Chocolatey v2.5.0
 5. https通信に必要なパッケージ mkcertをインストールする
-   > choco install mkcert
-   > mkcert --install
+   ```
+   choco install mkcert
+   mkcert --install
+   ```
    ルート証明書: rootCA.pemが発行される（rootCA.pemの保存先はmkcert -CAROOTで確認できる）
 6. フロントサーバーで使用されているURLを確認
    Vite+Reactの開発サーバーを起動し、ログに記録されているLocal:　〇〇　Network:　〇〇のアドレスを確認
 7. URLに対してサーバー証明書を発行
-   > mkcert localhost
+   ```
+   mkcert localhost
    > #2つのURLに対して証明書を発行する際は
-   > mkcert localhost 192.168.〇.〇
+   mkcert localhost 192.168.〇.〇
    > #2つのURLを指定した場合、デフォルトでlocalhost+1-key.pem（秘密鍵） および localhost+1.pem(サーバー証明書)が発行される
-8. スマートフォンで確認する場合はルート証明書をスマートフォン内に格納する
+   ```
+9. スマートフォンで確認する場合はルート証明書をスマートフォン内に格納する
    iPhoneの場合、設定> 一般> 情報> 証明書信頼設定で転送した証明書をオンにする
 
 以上の設定を行い、Webアプリ内でパスを通すことでhttps通信を行うことができる。
