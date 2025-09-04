@@ -52,7 +52,7 @@ Windows環境での構築ステップは以下の通り(Mac, Linuxでは別の�
 
 以上の設定を行い、Webアプリ内でパスを通すことでhttps通信を行うことができる。
 
-参考URL
+**参考URL**
 - https://qiita.com/dai-andy1976/items/b179ef6e56087ad1943d
 - https://qiita.com/dai-andy1976/items/6a47bb36932aa1d5af2d
 - https://chocolatey.org/install#individual
