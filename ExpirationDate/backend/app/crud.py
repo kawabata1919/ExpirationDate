@@ -8,7 +8,7 @@ def create_food(db: Session, food: schemas.FoodCreate, image_path: str = None):
     db_food = models.Food(
         name=food.name,
         expiry_date=food.expiry_date,
-        image_path=image_path
+        image_path=str(image_path)
     )
     db.add(db_food)
     db.commit()

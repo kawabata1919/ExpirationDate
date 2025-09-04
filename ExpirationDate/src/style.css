@@ -1,0 +1,65 @@
+/* すべてのボタンに共通のスタイル */
+.button {
+    padding: 10px 20px;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.3s ease-in-out;
+    
+  }
+  
+  /* ホバー時の透明度変更を管理するクラス */
+  .hovered {
+    opacity: 0.7;
+  }
+  
+  /* ボタンAの固有スタイル */
+  .button-orange{
+    background-color: #E83929	;
+    border-radius: 10px;
+    padding: 15px 30px;
+    position: relative; 
+    margin-right: 1rem;
+  }
+
+  .button-orange:after {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border: 0;
+    border-top: 3px solid #BCE1DF;
+    border-right: 3px solid #BCE1DF;
+    transform: rotate(45deg);
+    position: absolute;
+    top: 50%;
+    left: 7px;
+    margin-top: -5px;
+  }
+  
+  /* ボタンBの固有スタイル */
+  .button-red {
+    background-color: #D11C2C;
+    border-radius: 10px;
+    padding: 15px 30px;
+    position: relative; 
+  }
+
+  .button-red:after {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border: 0;
+    border-top: 3px solid #BCE1DF;
+    border-right: 3px solid #BCE1DF;
+    transform: rotate(45deg);
+    position: absolute;
+    top: 50%;
+    left: 7px;
+    margin-top: -5px;
+  }
+  
+  /* ボタンCの固有スタイル */
+  .button-green {
+    background-color: green;
+    border-radius: 20px;
+  }

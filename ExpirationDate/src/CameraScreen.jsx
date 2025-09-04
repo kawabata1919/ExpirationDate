@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import Webcam from 'react-webcam';
 
 // API_URLを動的に決定
+// 以下は環境に合わせて設定してください
 let API_URL;
 if (window.location.hostname === 'localhost') {
   API_URL = 'https://localhost:8000';

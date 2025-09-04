@@ -1,4 +1,5 @@
 from fastapi import FastAPI, Depends, HTTPException, UploadFile, File, Form
+from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from . import models, schemas, crud
@@ -6,6 +7,7 @@ from .database import SessionLocal, engine, Base
 import shutil
 import os
 from datetime import datetime
+from pathlib import Path
 
 Base.metadata.create_all(bind=engine)
 
@@ -21,6 +23,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.mount("/images", StaticFiles(directory="app/images"), name="images")
 
 def get_db():
     db = SessionLocal()
@@ -44,13 +48,13 @@ async def create_food(
 ):
     image_path = None
     if file:
-        images_dir = "app/images"
+        images_dir = Path("app/images")
         os.makedirs(images_dir, exist_ok=True)
         filename = f"{datetime.now().strftime('%Y%m%d%H%M%S')}_{file.filename}"
-        file_path = os.path.join(images_dir, filename)
+        file_path = images_dir / filename
         with open(file_path, "wb") as buffer:
             shutil.copyfileobj(file.file, buffer)
-        image_path = file_path
+        image_path = f"images/{filename}"  # 相対パスを保存
     food_create = schemas.FoodCreate(name=name, expiry_date=expiry_date)
     return crud.create_food(db, food_create, image_path)
 
