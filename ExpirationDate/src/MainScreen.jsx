@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Button from './Button';
 
 // API_URLを動的に決定
 let API_URL;
@@ -47,17 +48,7 @@ const MainScreen = ({ onCameraClick, onListClick }) => {
   const [loading, setLoading] = useState(true);
 
   // マウスイベントの管理
-  const [isHovered, setIsHovered] = useState(false);
-
-  // マウスが要素に入った時のハンドラ
-  const handleMouseEnter = () => {
-    setIsHovered(true);
-  };
-
-  // マウスが要素から離れた時のハンドラ
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-  };
+  // const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
     const fetchItems = async () => {
@@ -95,22 +86,11 @@ const MainScreen = ({ onCameraClick, onListClick }) => {
           </ul>
         )}
       </div>
-      <button
-        style={{ margin: '20px', padding: '20px 40px', fontSize: '1.2rem', borderRadius: '8px', border: 'none', background: '#4caf50', color: '#fff', cursor: 'pointer', opacity: isHovered ? 0.7 : 1}} // ホバー時は0.7、通常時は1 (不透明) }}
-        onClick={onCameraClick}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-      >
-        カメラで登録
-      </button>
-      <button
-        style={{ margin: '20px', padding: '20px 40px', fontSize: '1.2rem', borderRadius: '8px', border: 'none', background: '#2196f3', color: '#fff', cursor: 'pointer', opacity: isHovered ? 0.7 : 1 }}
-        onClick={onListClick}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-      >
-        消費期限リストを見る
-      </button>
+      <div>
+      <Button onClick={onCameraClick} text="カメラで登録" className="button button-orange" />
+      <Button onClick={onListClick} text="消費期限リストを見る" className="button button-red" />
+      </div>
+
     </div>
   );
 };

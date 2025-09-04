@@ -118,33 +118,42 @@ const ExpiryListScreen = ({ onBack }) => {
         <div style={{ color: 'red' }}>{error}</div>
       ) : (
         <ul style={{ listStyle: 'none', padding: 0, width: '350px' }}>
-          {items.map(item => (
-            <li key={item.id} style={{ background: '#fff', margin: '10px 0', padding: '15px', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.05)', display: 'flex', alignItems: 'center' }}>
-              <input
-                type="text"
-                value={item.name}
-                onChange={e => handleChange(item.id, 'name', e.target.value)}
-                style={{ fontWeight: 'bold', width: '100px', marginRight: '10px' }}
-                disabled={!item.isNew}
-              />
-              -
-              <input
-                type="date"
-                value={item.expiry_date || ''}
-                onChange={e => handleChange(item.id, 'expiry_date', e.target.value)}
-                style={{ marginLeft: '10px' }}
-                disabled={!item.isNew}
-              />
-              {item.image_path && (
-                <img src={`${API_URL}/${item.image_path}`} alt="food" style={{ width: 40, height: 40, objectFit: 'cover', marginLeft: 10, borderRadius: 4 }} />
-              )}
-              {item.isNew ? (
-                <button style={{ marginLeft: 10 }} onClick={() => handleRegister(item)}>登録</button>
-              ) : (
-                <button style={{ marginLeft: 10, background: '#f44336', color: '#fff', border: 'none', borderRadius: 4, padding: '4px 10px', cursor: 'pointer' }} onClick={() => handleDelete(item.id)}>削除</button>
-              )}
-            </li>
-          ))}
+          {items.map(item => {
+            // 画像パスをコンソールに表示
+            if (item.image_path) {
+              console.log('画像パス:', `${API_URL}/${item.image_path}`);
+              console.log('API_URL:', API_URL);
+              console.log('item.image_path:', item.image_path);
+            }
+            
+            return (
+              <li key={item.id} style={{ background: '#fff', margin: '10px 0', padding: '15px', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.05)', display: 'flex', alignItems: 'center' }}>
+                <input
+                  type="text"
+                  value={item.name}
+                  onChange={e => handleChange(item.id, 'name', e.target.value)}
+                  style={{ fontWeight: 'bold', width: '100px', marginRight: '10px' }}
+                  disabled={!item.isNew}
+                />
+                -
+                <input
+                  type="date"
+                  value={item.expiry_date || ''}
+                  onChange={e => handleChange(item.id, 'expiry_date', e.target.value)}
+                  style={{ marginLeft: '10px' }}
+                  disabled={!item.isNew}
+                />
+                {item.image_path && (
+                  <img src={`${API_URL}/${item.image_path}`} alt="food" style={{ width: 40, height: 40, objectFit: 'cover', marginLeft: 10, borderRadius: 4 }} />
+                )}
+                {item.isNew ? (
+                  <button style={{ marginLeft: 10 }} onClick={() => handleRegister(item)}>登録</button>
+                ) : (
+                  <button style={{ marginLeft: 10, background: '#f44336', color: '#fff', border: 'none', borderRadius: 4, padding: '4px 10px', cursor: 'pointer' }} onClick={() => handleDelete(item.id)}>削除</button>
+                )}
+              </li>
+            );
+          })}
         </ul>
       )}
       <button
