@@ -25,9 +25,9 @@ https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q10262656235
    ```
    Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
    ```
-   >PowerShellの実行ポリシーがRestrictedになっている場合、上記のインストールコマンドが使用できない可能性があるため、その場合は以下を実行。
-   > Get-ExecutionPolicy #Restrictedであることを確認
-   > Set-ExecutionPolicy AllSigned
+   > PowerShellの実行ポリシーがRestrictedになっている場合、上記のインストールコマンドが使用できない可能性があるため、その場合は以下を実行。
+   `Get-ExecutionPolicy #Restrictedであることを確認`
+   `Set-ExecutionPolicy AllSigned`
 
 4. chocoコマンドが実行できることを確認
    > choco list -l
