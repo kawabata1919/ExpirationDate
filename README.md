@@ -15,12 +15,6 @@
 ## HTTPS通信の有効化について
 PCのみであればHTTP通信のみで検証可能であったが、使用環境としてスマートフォンを想定しており、HTTPS通信が必要であるため、認証鍵を用意する必要がある。
 Windows環境での構築ステップは以下の通り(Mac, Linuxでは別の操作が必要の可能性大)
-# 参考URL
-https://qiita.com/dai-andy1976/items/b179ef6e56087ad1943d
-https://qiita.com/dai-andy1976/items/6a47bb36932aa1d5af2d
-https://chocolatey.org/install#individual
-https://learn.microsoft.com/ja-jp/powershell/module/microsoft.powershell.core/about/about_execution_policies?view=powershell-7.5
-https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q10262656235
 
 1. PowerShellを管理者権限で開く
 2. Chocolateryをインストールする。
@@ -57,3 +51,10 @@ https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q10262656235
    iPhoneの場合、設定> 一般> 情報> 証明書信頼設定で転送した証明書をオンにする
 
 以上の設定を行い、Webアプリ内でパスを通すことでhttps通信を行うことができる。
+
+参考URL
+https://qiita.com/dai-andy1976/items/b179ef6e56087ad1943d
+https://qiita.com/dai-andy1976/items/6a47bb36932aa1d5af2d
+https://chocolatey.org/install#individual
+https://learn.microsoft.com/ja-jp/powershell/module/microsoft.powershell.core/about/about_execution_policies?view=powershell-7.5
+https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q10262656235
