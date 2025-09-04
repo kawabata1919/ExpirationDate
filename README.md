@@ -27,8 +27,10 @@ https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q10262656235
    ```
    > PowerShellの実行ポリシーがRestrictedになっている場合、上記のインストールコマンドが使用できない可能性があるため、\
    > その場合は以下を実行。\
-   `Get-ExecutionPolicy #Restrictedであることを確認`\
-   `Set-ExecutionPolicy AllSigned`
+   ```
+   Get-ExecutionPolicy #Restrictedであることを確認
+   Set-ExecutionPolicy AllSigned
+   ```
 
 4. chocoコマンドが実行できることを確認
    > choco list -l
